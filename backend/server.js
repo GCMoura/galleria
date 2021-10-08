@@ -23,10 +23,15 @@ router.get('/', async (req, res) => {
   //   .then(response => {
   //     res.send(response.data)
   //   })
-  axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}`)
-    .then(response => {
-      res.send(response.data)
-    })
+
+  try {
+    await axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}`)
+      .then(response => {
+        res.send(response.data)
+      })
+  } catch (error) {
+      console.log(error)
+  }
   
 })
 

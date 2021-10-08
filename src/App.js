@@ -9,23 +9,20 @@ function App() {
   const [image, setImage] = useState([])
   
   async function getArt(){
-    await fetch(`${BASE_URL}`)
+    var dataImage
+    try {
+      await fetch(`${BASE_URL}`)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        const dataImage = data.artObjects
-
-        dataImage.forEach(element => {
-          // console.log(element.webImage.url)
-
-            setImage( [element.webImage.url])
-          
-        });
-        
+        console.log(data.artObjects)
+        setImage([...image, data.artObjects.webImage.url ]) 
       })
-      
-
+    } catch (error) {
+      console.log(error)
+    }
+          
   }
 
   return (
@@ -33,15 +30,13 @@ function App() {
       <h1>Galleria</h1>
       <button onClick={getArt}>Click</button>
       <div>
-      <ul>
         {
-          image.map((index, img) => {
-            {/* console.log(img) */}
-            return <li key={index}>  {1} </li>
-            {/* <img src={img} key={index} width="300" height="150"/> */}
+          image.map((img, index) => {
+            console.log(img)
+            return <img src={img} key={index} width="300" height="150" alt=""/> 
           })
         }
-      </ul>
+      
       </div>
     </>
   );
