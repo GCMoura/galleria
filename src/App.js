@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Paint from './components/Paint'
 
 function App() {
 
@@ -17,12 +18,20 @@ function App() {
       })
       .then(data => {
         console.log(data.artObjects)
-        setImage([...image, data.artObjects.webImage.url ]) 
+        dataImage = data.artObjects
       })
     } catch (error) {
       console.log(error)
     }
-          
+    dataImage.map(masterpieces => {
+      console.log(masterpieces)
+
+      var painting = masterpieces.id.split('-')
+      if(painting[1] === "SK") {
+        return setImage([...image, masterpieces.webImage.url ]) 
+      }
+      return null
+    })
   }
 
   return (
@@ -33,7 +42,7 @@ function App() {
         {
           image.map((img, index) => {
             console.log(img)
-            return <img src={img} key={index} width="300" height="150" alt=""/> 
+            return <Paint key={index} src={img}/>
           })
         }
       
