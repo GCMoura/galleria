@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Paint from './components/Paint'
 
 function App() {
@@ -7,44 +7,63 @@ function App() {
   ? 'http://localhost:5000'
   : 'https://rijksmuseum.herokuapp.com'
   
-  const [image, setImage] = useState([])
+  const [images, setImages] = useState([])
+  // const [imagesURL, setImagesURL] = useState([])
+  var imagesURL = [1,2,3]
   
-  async function getArt(){
-    var dataImage
+  // async function getArt(){
+  //   try {
+  //     await fetch(`${BASE_URL}`)
+  //     .then(response => {
+  //       return response.json()
+  //     })
+  //     .then(data => {
+  //       //console.log(data.artObjects)
+  //       setImages([...images, data.artObjects]) 
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   getMasterpieces()
+  // }
+
+  useEffect(() => {
     try {
-      await fetch(`${BASE_URL}`)
+      fetch(`http://localhost:5000`)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        console.log(data.artObjects)
-        dataImage = data.artObjects
+        setImages([data.artObjects]) 
       })
     } catch (error) {
       console.log(error)
     }
-    dataImage.map(masterpieces => {
-      console.log(masterpieces)
+    //getMasterpieces()
+  }, [])
 
-      var painting = masterpieces.id.split('-')
-      if(painting[1] === "SK") {
-        return setImage([...image, masterpieces.webImage.url ]) 
+  function getMasterpieces(){
+    images.map(el => {
+      console.log(el.length)
+      for (let index = 0; index < el.length; index++) {
+        imagesURL.push(el[index].webImage.url)
+        //console.log(el[index].webImage.url)
+        // setImagesURL([...imagesURL, el[index].webImage.url])
       }
-      return null
     })
+    console.log(imagesURL)
   }
 
   return (
     <>
       <h1>Galleria</h1>
-      <button onClick={getArt}>Click</button>
+      <button onClick={getMasterpieces}>Click</button>
       <div>
-        {
-          image.map((img, index) => {
-            console.log(img)
-            return <Paint key={index} src={img}/>
-          })
-        }
+       {
+        imagesURL.map(el => {
+          console.log(el)
+        })
+       }
       
       </div>
     </>
