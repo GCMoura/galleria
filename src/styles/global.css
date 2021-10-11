@@ -13,5 +13,9 @@
   font-size: 22px;
 
   font-family: 'Space Mono', monospace;
+}
 
+main{
+ 
+  height: 100vh;
 }
