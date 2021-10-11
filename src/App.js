@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Paint from './components/Paint'
 
 function App() {
 
