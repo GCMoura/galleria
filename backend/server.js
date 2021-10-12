@@ -14,7 +14,9 @@ const api_key = process.env.API_KEY
 const port = process.env.PORT || 5000
 
 // router.get('/:search/:page', async (req, res) => {
-router.get('/', async (req, res) => {
+router.get('/:page', async (req, res) => {
+
+  const { page } = req.params
 
   // const { search } = req.params
   // const { page } = req.params
@@ -25,7 +27,7 @@ router.get('/', async (req, res) => {
   //   })
 
   try {
-    await axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}`)
+    await axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}&ps=100&p=${page}`)
       .then(response => {
         res.send(response.data)
       })
