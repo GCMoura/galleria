@@ -9,9 +9,64 @@
 
 :root{
   --white: #fff;
-
+  --black: #111;
+  --orange: #8F4C35;
+  --light-orange: #FF7040;
+  --dark-orange: #721D00; 
+  
   font-size: 22px;
 
   font-family: 'Space Mono', monospace;
+}
+
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.loader-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main{
+  
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input{
+
+  width: 250px;
+  height: 40px;
+  margin: 5px 10px; 
+
+  cursor: pointer;
+  border-radius: 8px;
+
+  font-size: 20px;
+  font-family: 'Space Mono', monospace;
+
+  background-color: var(--orange);
+  border: 2px solid var(--orange);
+  color: var(--white);
+  transition: 1s ease;
+
+}
+
+input:hover{
+  background-color: var(--light-orange);
+  color: var(--dark-orange);
 }
 

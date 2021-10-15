@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import '../../styles/loader.scss'
+import Loader from '../../component/Loader'
+import Masterpiece from '../../component/Masterpiece'
 
 function Home() {
   
@@ -18,33 +19,32 @@ function Home() {
 
   function handleSubmit(event){
     event.preventDefault()
+    console.log(artist)
     document.querySelector('.loader').style.display = "block"
     getArt()
   }
   
   function getArt(){
-    
     try {
-      fetch(`${BASE_URL}/${page}`)
+      fetch(`${BASE_URL}/${artist}/${page}`)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        
+        console.log(data)
         for(let index in data.artObjects){  
           let id = data.artObjects[index].id.split('-')
           if(id[1] === 'SK'){
             if(data.artObjects[index].webImage !== null && data.artObjects[index].hasImage){
-              if( data.artObjects[index].principalOrFirstMaker === artist){
-                arrArt.push(data.artObjects[index].webImage.url)
-                arrArtTitle.push(data.artObjects[index].title)
-              }
-            }
-          }
+              console.log('page - ', page)
+              arrArt.push(data.artObjects[index].webImage.url)
+              arrArtTitle.push(data.artObjects[index].title)
+             }
+           }
         }
         
         page++
-        if(page <= Math.floor(data.count / 100 + 1) && page <= 7){
+        if(page <= Math.floor(data.count / 100 + 1) && page <= 15){
           getArt()
         } else {
           page = 1
@@ -61,36 +61,34 @@ function Home() {
 
   return (
     <>
+    <header>
       <h1>Galleria</h1>
       
       <form onSubmit={handleSubmit}>
-        <input type='submit' value="Rembrandt van Rijn" onClick={(event) => { setArtist(event.target.value) }} />
-        <input type='submit' value="Johannes Vermeer" onClick={(event) => { setArtist(event.target.value) }} />
-        <input type='submit' value="Vincent van Gogh" onClick={(event) => { setArtist(event.target.value) }} />
-        <input type='submit' name="Jan Havicksz. Steen" value="Jan Steen" onClick={(event) => { setArtist(event.target.name) }} />
+        <input  type='submit' value="Rembrandt van Rijn" onClick={(event) => { setArtist(event.target.value) } } />
+        <input  type='submit' value="Johannes Vermeer" onClick={(event) => { setArtist(event.target.value) }} />
+        <input  type='submit' value="Vincent van Gogh" onClick={(event) => { setArtist(event.target.value) }} />
       </form> 
+    </header>
+    
+    <div className="loader-div">
+      <Loader />
+    </div>
 
-      <div class="loader">
-        <div class="loader__bar"></div>
-        <div class="loader__bar"></div>
-        <div class="loader__bar"></div>
-        <div class="loader__bar"></div>
-        <div class="loader__bar"></div>
-        <div class="loader__ball"></div>
-        <h4>Loading...</h4>
-      </div>
-
+    <main >
       {
         storeImages.map((img, index) => {
           
           return (
-            <main key={index}>
-              <img  src={img} alt='' width='300' height='300' />
-              <h3> {storeTitle[index] } </h3>
-            </main>
+              <Masterpiece 
+                key={index}
+                src={img}
+                title={ storeTitle[index] }
+              />
           )
         })
       }
+    </main>
     </>
   );  
 }

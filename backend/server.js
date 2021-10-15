@@ -14,20 +14,13 @@ const api_key = process.env.API_KEY
 const port = process.env.PORT || 5000
 
 // router.get('/:search/:page', async (req, res) => {
-router.get('/:page', async (req, res) => {
+router.get('/:search/:page', async (req, res) => {
 
   const { page } = req.params
-
-  // const { search } = req.params
-  // const { page } = req.params
-
-  // axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}&q=${search}&ps=100&p=${page}`)
-  //   .then(response => {
-  //     res.send(response.data)
-  //   })
+  const { search } = req.params
 
   try {
-    await axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}&ps=100&p=${page}`)
+    await axios.get(`https://www.rijksmuseum.nl/api/en/collection?key=${api_key}&q=${search}&ps=100&p=${page}`)
       .then(response => {
         res.send(response.data)
       })
