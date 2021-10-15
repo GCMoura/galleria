@@ -14,11 +14,10 @@
   min-height: 300px;
   border: 2px solid var(--black);
   cursor: pointer;
-  transition: 0.8s ease-in;
+  transition: 0.5s ease-in;
 }
 
 .img:hover{
-  opacity: 1;
   transform: scale(1.6);
   z-index: 100;
 }
@@ -35,4 +34,14 @@
   background-color: transparent;
   text-align: center;
   display: none;
+}
+
+@media(max-width: 810px){
+  .figcaption{
+    font-size: 14px;
+    top: -15px;
+  }
+  .img:hover{
+    transform: scale(1.3);
+  }
 }

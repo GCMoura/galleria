@@ -32,14 +32,8 @@ header{
   align-items: center;
   justify-content: center;
 }
-.loader-div{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-main{
-  
+.main{
   width: 90%;
   margin: 20px auto;
   display: flex;
@@ -70,3 +64,20 @@ input:hover{
   color: var(--dark-orange);
 }
 
+@media(max-width: 810px){
+  main{
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    font-size: 18px;
+    height: 30px;
+  }
+}

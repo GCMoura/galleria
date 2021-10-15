@@ -19,8 +19,8 @@ function Home() {
 
   function handleSubmit(event){
     event.preventDefault()
-    console.log(artist)
     document.querySelector('.loader').style.display = "block"
+    document.querySelector('.main').style.opacity = "0.2"
     getArt()
   }
   
@@ -51,6 +51,7 @@ function Home() {
           document.querySelector('.loader').style.display = "none"
           setStoreImages(arrArt)
           setStoreTitle(arrArtTitle)
+          document.querySelector('.main').style.opacity = "1"
         }
 
       })
@@ -71,12 +72,10 @@ function Home() {
       </form> 
     </header>
     
-    <div className="loader-div">
-      <Loader />
-    </div>
+    <Loader />
 
-    <main >
-      {
+    <main className="main main-hidden">
+      { 
         storeImages.map((img, index) => {
           
           return (
