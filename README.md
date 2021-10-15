@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
--  Enjoy my project: [Art Gelleria](https://artgalleria.vercel.app/)
+-  Enjoy my project: [Art Galleria](https://artgalleria.vercel.app/)
 
 ## My process
 
