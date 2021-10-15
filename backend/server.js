@@ -13,7 +13,6 @@ dotenv.config()
 const api_key = process.env.API_KEY
 const port = process.env.PORT || 5000
 
-// router.get('/:search/:page', async (req, res) => {
 router.get('/:search/:page', async (req, res) => {
 
   const { page } = req.params

@@ -31,12 +31,10 @@ function Home() {
         return response.json()
       })
       .then(data => {
-        console.log(data)
         for(let index in data.artObjects){  
           let id = data.artObjects[index].id.split('-')
           if(id[1] === 'SK'){
             if(data.artObjects[index].webImage !== null && data.artObjects[index].hasImage){
-              console.log('page - ', page)
               arrArt.push(data.artObjects[index].webImage.url)
               arrArtTitle.push(data.artObjects[index].title)
              }
